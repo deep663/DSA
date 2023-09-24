@@ -31,6 +31,7 @@ void insert(int x, char p)
     else
     {
         printf("Please enter the second perameter 'b' or 'e'\n");
+        return ;
     }
 
     printf("%d inserted\n",temp->data);
@@ -49,6 +50,47 @@ void insertn(int x, int n)
     ptr->next = temp; 
 
     printf("%d inserted\n",temp->data);
+}
+
+void delete(char p)
+{
+    Node *temp;
+    temp = Head;
+    if(p == 'b')
+    {
+        Head = Head->next;
+    }
+    else if(p=='e')
+    {
+        Node *ptr;
+        while(temp->next != NULL)
+        {
+            ptr = temp;
+            temp =temp->next;
+        }
+        ptr->next = NULL;
+    }
+    else
+    {
+        printf("Please pass 'b' or 'e'\n" );
+        return ;
+    }
+    printf("%d Deleted\n", temp->data);
+    free(temp);
+}
+
+void deleten(int n)
+{
+    Node *temp, *ptr;
+    temp = Head;
+    for (int i = 1; i < n; i++)
+    {
+        ptr = temp;
+        temp = temp->next;
+    }
+    ptr->next = temp->next;
+    printf("%d Deleted\n", temp->data);
+    free(temp);
 }
 
 void show()
@@ -78,6 +120,13 @@ int main()
     show();
     insertn(4, 3);
     show();
+    delete('b');
+    show();
+    delete('e');
+    show();
+    deleten(2);
+    show();
+    delete('a');
 
     return 0;
 }
